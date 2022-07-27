@@ -2,12 +2,10 @@ from telethon.sync import TelegramClient
 from telethon.tl.functions.channels import GetParticipantsRequest
 from telethon.tl.types import ChannelParticipantsSearch
 
-import sqlite3
 
-
-api_hash = 'здесь api_hash'
-username = 'здесь твой ник в тг'
-api_id = #десь api_id без кавычек
+api_hash = 'c11b0da892cea5fd65f5091dab71003b'
+username = 'k0kosics'
+api_id = 14226922
 
 
 client = TelegramClient(username,api_id,api_hash)
@@ -26,17 +24,11 @@ async def dump_all_paticipants(chanel):
         all_participants.extend(participiants.users)
         offset_user = offset_user + len(participiants.users)
     all_users = []
+    file = open('users.txt','w+')
     for participiant in all_participants:
-        all_users.append({'id': participiant.id,
-                          'last_name':participiant.username,
-                          'user':participiant.username})
+        user_string = f"id:{participiant.id}  user_name:{participiant.username} phone:{participiant.phone}\n"
+        file.write(user_string)
 
-    for i in all_users:
-        conn = sqlite3.connect("usears_data.db")
-        curs = conn.cursor()
-        curs.execute(f"""INSERT INTO users VALUES(?,?,?)""",(i['id'],i['last_name'],i['user']))
-        conn.commit()
-        conn.close()
 
 
 
