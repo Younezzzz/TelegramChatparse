@@ -26,13 +26,18 @@ async def dump_all_paticipants(chanel):
     all_users = []
     file = open('users.txt','w+')
     for participiant in all_participants:
-        user_string = f"id:{participiant.id}  user_name:{participiant.username} phone:{participiant.phone}\n"
-        file.write(user_string)
-
-
-
-
-
+        if (participiant.phone is None) and (participiant.username is None):
+            user_string = f"id:{participiant.id}\n"
+            file.write(user_string)
+        elif participiant.phone is None:
+            user_string = f"id:{participiant.id}  user_name:{participiant.username}\n"
+            file.write(user_string)
+        elif participiant.username is None:
+            user_string = f"id:{participiant.id} phone:{participiant.phone}\n"
+            file.write(user_string)
+        else:
+            user_string = f"id:{participiant.id}  user_name:{participiant.username} phone:{participiant.phone}\n"
+            file.write(user_string)
 
 async def main():
     url = input("Введите ссылку на канал или чат: ")
@@ -41,8 +46,6 @@ async def main():
 with client:
     client.loop.run_until_complete(main())
 client.start()
-
-
 
 
 
