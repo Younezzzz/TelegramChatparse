@@ -2,9 +2,9 @@ from telethon.sync import TelegramClient
 from telethon.tl.functions.channels import GetParticipantsRequest,InviteToChannelRequest
 from telethon.tl.types import ChannelParticipantsSearch
 
-api_hash = 'c11b0da892cea5fd65f5091dab71003b'
-username = 'k0kosics'
-api_id = 14226922
+api_hash = ''
+username = ''
+api_id = 
 
 
 client = TelegramClient(username,api_id,api_hash)
